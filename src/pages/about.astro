@@ -1,0 +1,599 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+
+const pageTitle = "About";
+const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A concise biography, background, core technologies, and contact info.`;
+---
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  path="/about/"
+  image={profile.avatar}
+  imageAlt={profile.avatarAlt}
+  bookPage
+>
+  <div class="about-page">
+    <!-- Top Navigation Header -->
+    <header class="about-header">
+      <nav class="about-nav" aria-label="Page navigation">
+        <a href="/" class="about-back">
+          <span aria-hidden="true">←</span>
+          <span>Back to Space</span>
+        </a>
+        <span class="about-nav-divider" aria-hidden="true">/</span>
+        <span class="about-nav-current" aria-current="page">About</span>
+      </nav>
+    </header>
+
+    <!-- Main Editorial Bio Article -->
+    <article class="about-main">
+      <div class="about-grid">
+        <!-- Visual Portrait / Card Column -->
+        <div class="about-visual">
+          <div class="about-card-wrapper">
+            <img
+              src={profile.avatar}
+              alt={profile.avatarAlt}
+              width="600"
+              height="900"
+              class="about-card-img"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <!-- Copy & Dossier Column -->
+        <div class="about-copy">
+          <p class="about-eyebrow">BIOGRAPHY &bull; CREATIVE PROFILE</p>
+          <h1 class="about-title">{profile.name}</h1>
+          <p class="about-role">{profile.role}</p>
+          <p class="about-tagline">{profile.tagline}</p>
+
+          <!-- Bio Paragraphs -->
+          <div class="about-paragraphs">
+            {profile.bio.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+
+          <!-- Quick Metadata / Facts -->
+          <div class="about-facts">
+            <div class="about-fact-item">
+              <span class="about-fact-label">Location</span>
+              <span class="about-fact-value">Netherlands</span>
+            </div>
+            <div class="about-fact-item">
+              <span class="about-fact-label">Specialization</span>
+              <span class="about-fact-value">Web Engineering &amp; 3D</span>
+            </div>
+            <div class="about-fact-item">
+              <span class="about-fact-label">Studio</span>
+              <a
+                href={profile.callout.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="about-fact-value about-fact-link"
+              >
+                KaliWebWorks
+              </a>
+            </div>
+            <div class="about-fact-item">
+              <span class="about-fact-label">Status</span>
+              <span class="about-fact-value about-status-badge">Available for Projects</span>
+            </div>
+          </div>
+
+          <!-- Direct Actions -->
+          <div class="about-actions">
+            <a
+              href={profile.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href={profile.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-btn"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={profile.socials.email}
+              class="about-btn about-btn--primary"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"/>
+              </svg>
+              <span>Get in Touch</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills & Technology Stack -->
+      <section class="about-section about-skills">
+        <h2 class="about-section-title">Core Disciplines &amp; Tooling</h2>
+        <div class="skills-grid">
+          {profile.skills.map((group) => (
+            <div class="skills-card">
+              <h3 class="skills-card-title">{group.category}</h3>
+              <ul class="skills-list">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- CMS Blog Readiness Placeholder Section -->
+      <section class="about-section about-blog-preview">
+        <div class="blog-preview-card">
+          <div class="blog-preview-badge">UPCOMING</div>
+          <h2 class="blog-preview-title">{profile.blog.title}</h2>
+          <p class="blog-preview-desc">{profile.blog.description}</p>
+          <div class="blog-preview-status">
+            <span class="pulse-dot"></span>
+            <span>{profile.blog.status}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Callout: KaliWebWorks -->
+      <footer class="about-footer-banner">
+        <div class="about-footer-inner">
+          <div class="about-footer-text">
+            <span class="about-footer-heading">{profile.callout.text}</span>
+            <span class="about-footer-sub">Explore bespoke digital development and web craft at KaliWebWorks.</span>
+          </div>
+          <a
+            href={profile.callout.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="about-footer-cta"
+          >
+            {profile.callout.linkText}
+          </a>
+        </div>
+        <div class="about-footer-legal">
+          <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
+          <div class="about-footer-links">
+            <a href="/legal/legal-notice/">Legal Notice</a>
+            <a href="/legal/privacy/">Privacy</a>
+            <a href="/legal/cookies/">Cookies</a>
+            <a href="/attributions/">Credits</a>
+          </div>
+        </div>
+      </footer>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
+    color: #f4e6ca;
+  }
+
+  .about-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .about-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    color: rgba(244, 230, 202, 0.7);
+  }
+
+  .about-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #d9a13d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 150ms ease;
+  }
+
+  .about-back:hover {
+    color: #f5d77f;
+  }
+
+  .about-nav-divider {
+    opacity: 0.4;
+  }
+
+  .about-nav-current {
+    color: #f4e6ca;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 380px) 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .about-visual {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .about-card-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(217, 161, 61, 0.4),
+      0 16px 40px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba(217, 161, 61, 0.15);
+    background: #080d19;
+  }
+
+  .about-card-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+    transition: transform 300ms ease;
+  }
+
+  .about-card-wrapper:hover .about-card-img {
+    transform: scale(1.02);
+  }
+
+  .about-eyebrow {
+    margin: 0 0 0.75rem;
+    color: #d9a13d;
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .about-title {
+    margin: 0 0 0.4rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #f4e6ca;
+  }
+
+  .about-role {
+    margin: 0 0 0.75rem;
+    color: #d9a13d;
+    font-family: Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .about-tagline {
+    margin: 0 0 2rem;
+    color: rgba(244, 230, 202, 0.75);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .about-paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(244, 230, 202, 0.88);
+    margin-bottom: 2.5rem;
+  }
+
+  .about-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(217, 161, 61, 0.2);
+    margin-bottom: 2rem;
+  }
+
+  .about-fact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .about-fact-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #d9a13d;
+  }
+
+  .about-fact-value {
+    font-size: 0.95rem;
+    color: #f4e6ca;
+  }
+
+  .about-fact-link {
+    color: #f5d77f;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .about-status-badge {
+    color: #86efac;
+    font-weight: 600;
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #f4e6ca;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(244, 230, 202, 0.2);
+    transition: all 180ms ease;
+  }
+
+  .about-btn:hover {
+    background: rgba(217, 161, 61, 0.2);
+    border-color: #d9a13d;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .about-btn--primary {
+    background: #d9a13d;
+    border-color: #d9a13d;
+    color: #03050b;
+    font-weight: 700;
+  }
+
+  .about-btn--primary:hover {
+    background: #f5d77f;
+    border-color: #f5d77f;
+    color: #03050b;
+  }
+
+  /* Sections */
+  .about-section {
+    margin-bottom: 3.5rem;
+  }
+
+  .about-section-title {
+    font-family: Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #f4e6ca;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(217, 161, 61, 0.3);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skills-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: rgba(11, 17, 32, 0.6);
+    border: 1px solid rgba(217, 161, 61, 0.2);
+  }
+
+  .skills-card-title {
+    margin: 0 0 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #d9a13d;
+  }
+
+  .skills-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: rgba(244, 230, 202, 0.85);
+    font-size: 0.95rem;
+  }
+
+  /* Blog Preview Card */
+  .blog-preview-card {
+    position: relative;
+    padding: 2.25rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(16, 26, 48, 0.7) 0%, rgba(8, 13, 25, 0.85) 100%);
+    border: 1px dashed rgba(217, 161, 61, 0.45);
+  }
+
+  .blog-preview-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(217, 161, 61, 0.2);
+    color: #f5d77f;
+    font-family: Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-preview-title {
+    margin: 0 0 0.5rem;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #f4e6ca;
+  }
+
+  .blog-preview-desc {
+    margin: 0 0 1.25rem;
+    color: rgba(244, 230, 202, 0.75);
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+
+  .blog-preview-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+    color: #d9a13d;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d9a13d;
+    box-shadow: 0 0 8px #d9a13d;
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* Footer banner */
+  .about-footer-banner {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(217, 161, 61, 0.3);
+  }
+
+  .about-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 8px;
+    background: rgba(217, 161, 61, 0.08);
+    border: 1px solid rgba(217, 161, 61, 0.35);
+    margin-bottom: 2rem;
+  }
+
+  .about-footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .about-footer-heading {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    color: #f5d77f;
+    font-weight: 600;
+  }
+
+  .about-footer-sub {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: rgba(244, 230, 202, 0.8);
+  }
+
+  .about-footer-cta {
+    display: inline-flex;
+    padding: 0.85rem 1.6rem;
+    border-radius: 6px;
+    background: #d9a13d;
+    color: #03050b;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all 180ms ease;
+  }
+
+  .about-footer-cta:hover {
+    background: #f5d77f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(217, 161, 61, 0.35);
+  }
+
+  .about-footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: rgba(244, 230, 202, 0.55);
+  }
+
+  .about-footer-links {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .about-footer-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .about-footer-links a:hover {
+    color: #d9a13d;
+  }
+
+  @media (max-width: 840px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-visual {
+      position: static;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .about-footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

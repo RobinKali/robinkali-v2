@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#050811" />
+      <stop offset="100%" stop-color="#020307" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d77f" />
+      <stop offset="50%" stop-color="#d9a13d" />
+      <stop offset="100%" stop-color="#9a6e1e" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3" />
+      <stop offset="60%" stop-color="#1d4ed8" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#020307" stop-opacity="0" />
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="900" fill="url(#bg)" />
+  <rect width="600" height="900" fill="url(#glow)" />
+
+  <!-- Geometric / Celestial Frame -->
+  <rect x="28" y="28" width="544" height="844" fill="none" stroke="rgba(217,161,61,0.28)" stroke-width="1" />
+  <rect x="36" y="36" width="528" height="828" fill="none" stroke="rgba(244,230,202,0.12)" stroke-width="1" />
+
+  <!-- Corner Accents -->
+  <path d="M 28 48 L 48 48 L 48 28" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 572 48 L 552 48 L 552 28" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 28 852 L 48 852 L 48 872" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 572 852 L 552 852 L 552 872" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+
+  <!-- Top Emblem / Category -->
+  <text x="300" y="95" text-anchor="middle" fill="#d9a13d" font-family="'Courier New', monospace" font-size="12" letter-spacing="6">PERSONAL PROFILE &bull; 01</text>
+  <line x1="180" y1="115" x2="420" y2="115" stroke="rgba(217,161,61,0.3)" stroke-width="1" />
+
+  <!-- Central Constellation / Monogram Symbol -->
+  <g transform="translate(300, 340)">
+    <!-- Outer concentric rings -->
+    <circle r="140" fill="none" stroke="rgba(244,230,202,0.06)" stroke-width="1" />
+    <circle r="110" fill="none" stroke="rgba(217,161,61,0.22)" stroke-dasharray="4,8" stroke-width="1" />
+    <circle r="80" fill="none" stroke="rgba(59,130,246,0.25)" stroke-width="1" />
+    
+    <!-- Core glowing orb -->
+    <circle r="52" fill="url(#goldGrad)" opacity="0.9" filter="url(#shadow)" />
+    
+    <!-- Monogram 'RK' -->
+    <text x="0" y="16" text-anchor="middle" fill="#03050b" font-family="Georgia, serif" font-weight="bold" font-size="44" letter-spacing="2">RK</text>
+    
+    <!-- Orbiting nodes -->
+    <circle cx="0" cy="-110" r="4" fill="#f5d77f" />
+    <circle cx="110" cy="0" r="3" fill="#60a5fa" />
+    <circle cx="-78" cy="78" r="3.5" fill="#f5d77f" />
+    <circle cx="78" cy="-78" r="2.5" fill="#ffffff" />
+  </g>
+
+  <!-- Typography: Name & Title -->
+  <text x="300" y="580" text-anchor="middle" fill="#f4e6ca" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700" letter-spacing="4">ROBIN KALI</text>
+  <line x1="220" y1="605" x2="380" y2="605" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <text x="300" y="638" text-anchor="middle" fill="#d9a13d" font-family="'Courier New', monospace" font-size="14" letter-spacing="4">DEVELOPER &bull; CREATOR</text>
+
+  <!-- Brief Tagline on Cover -->
+  <text x="300" y="700" text-anchor="middle" fill="rgba(244,230,202,0.65)" font-family="Arial, sans-serif" font-size="14" letter-spacing="1">BIOGRAPHY &bull; WORKS &bull; JOURNAL</text>
+
+  <!-- Bottom CTA hint -->
+  <rect x="200" y="760" width="200" height="42" rx="21" fill="rgba(217,161,61,0.12)" stroke="rgba(217,161,61,0.5)" stroke-width="1" />
+  <text x="300" y="786" text-anchor="middle" fill="#f4e6ca" font-family="Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="2">EXPLORE DOSSIER</text>
+</svg>

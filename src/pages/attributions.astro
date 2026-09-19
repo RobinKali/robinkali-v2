@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { attributionDocument } from "../data/attributions";
+
+const page = attributionDocument;
+---
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  path={page.path}
+>
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  <article class="legal-page attribution-page" aria-labelledby="attribution-page-title">
+    <header class="legal-page__header">
+      <nav class="legal-page__breadcrumb" aria-label="Attributions navigation">
+        <a href="/">
+          <span aria-hidden="true">←</span>
+          Back to Home
+        </a>
+        <span class="legal-page__breadcrumb-separator" aria-hidden="true">/</span>
+        <span aria-current="page">{page.title}</span>
+      </nav>
+
+      <p class="legal-page__status">{page.status}</p>
+      <h1 id="attribution-page-title" class="legal-page__title">{page.title}</h1>
+      <p class="legal-page__lead">{page.description}</p>
+      <p class="legal-page__identity">{page.identity}</p>
+    </header>
+
+    <div class="legal-page__body">
+      <section class="legal-page__section">
+        {page.introduction.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </section>
+
+      <section class="legal-page__section">
+        <h2>{page.adaptations.heading}</h2>
+        {page.adaptations.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </section>
+
+      <section class="legal-page__section attribution-section">
+        <h2>Attributed works</h2>
+        <ul class="attribution-list">
+          {page.projects.map((project) => (
+            <li class="attribution-card">
+              <h3>{project.name}</h3>
+              <dl class="attribution-card__meta">
+                <div>
+                  <dt>{project.authorLabel}:</dt>
+                  <dd>{project.author}</dd>
+                </div>
+                <div>
+                  <dt>{project.versionLabel}:</dt>
+                  <dd>{project.version}</dd>
+                </div>
+                <div>
+                  <dt>{project.repositoryLabel}:</dt>
+                  <dd>
+                    <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                      {project.repositoryText}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{project.useLabel}:</dt>
+                  <dd>{project.use}</dd>
+                </div>
+                <div>
+                  <dt>{project.licenseLabel}:</dt>
+                  <dd>{project.license}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="legal-page__section">
+        <h2>{page.license.heading}</h2>
+        <p>{page.license.introduction}</p>
+        <h3>{page.license.copyrightHeading}</h3>
+        {page.license.copyrightLines.map((line) => (
+          <p class="attribution-legal__line">{line}</p>
+        ))}
+        <pre class="legal-page__pre"><code>{page.license.text}</code></pre>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

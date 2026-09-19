@@ -1,0 +1,322 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+
+const pageTitle = "Home";
+const pageDescription = `${profile.name} — ${profile.role}. ${profile.tagline}`;
+const particleTitle = "ABOUT ME";
+---
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  path="/"
+  image={profile.avatar}
+  imageAlt={profile.avatarAlt}
+  immersive
+>
+  <section class="wormhole-home" aria-label={`${profile.name} — Interactive Entry`}>
+    <iframe
+      class="wormhole-home__frame"
+      data-wormhole-frame
+      src="/wormhole-home.html"
+      title="Interactive 3D space scene"
+    ></iframe>
+
+    <!-- Floating central card leading to About Me with hyper-travel transition -->
+    <a
+      class="wormhole-home__cover-cta"
+      data-hyper-travel
+      href="/about/"
+      aria-label={`Explore About ${profile.name}`}
+      title="Click to explore About Me"
+    >
+      <img
+        src={profile.avatar}
+        alt={profile.avatarAlt}
+        width="600"
+        height="900"
+        loading="eager"
+      />
+      <span class="wormhole-home__card-badge">ENTER</span>
+    </a>
+
+    <!-- Interactive 3D Canvas Particle Title -->
+    <div class="title-particles" aria-hidden="true">
+      <canvas data-title-particles data-title={particleTitle}></canvas>
+    </div>
+    <h1
+      class="title-particles__fallback"
+      data-title-fallback
+      data-title={particleTitle}>{particleTitle}</h1>
+
+    <!-- Sleek Floating Bottom Dock / Footer Callout -->
+    <footer class="wormhole-dock" aria-label="Quick links and KaliWebWorks callout">
+      <div class="wormhole-dock__inner">
+        <div class="wormhole-dock__callout">
+          <span>{profile.callout.text}</span>
+          <a
+            href={profile.callout.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wormhole-dock__highlight"
+          >
+            {profile.callout.linkText}
+          </a>
+        </div>
+
+        <nav class="wormhole-dock__nav" aria-label="Social and navigation links">
+          <a
+            href="/about/"
+            class="wormhole-dock__btn wormhole-dock__btn--primary"
+            data-wormhole-link
+          >
+            About Me
+          </a>
+          <a
+            href={profile.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wormhole-dock__btn"
+            aria-label="GitHub Profile"
+          >
+            <svg class="dock-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a
+            href={profile.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wormhole-dock__btn"
+            aria-label="LinkedIn Profile"
+          >
+            <svg class="dock-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href={profile.socials.email}
+            class="wormhole-dock__btn"
+            aria-label="Send an Email"
+          >
+            <svg class="dock-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"/>
+            </svg>
+            <span>Email</span>
+          </a>
+          <a
+            href="/attributions/"
+            class="wormhole-dock__btn wormhole-dock__btn--subtle"
+            title="Attributions & Licenses"
+          >
+            Credits
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </section>
+</BaseLayout>
+
+<script src="../scripts/title-particles.ts"></script>
+
+<style>
+  .wormhole-home {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #010208;
+  }
+
+  .wormhole-home__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 1;
+    background: #010101;
+  }
+
+  .wormhole-home__cover-cta {
+    position: absolute;
+    z-index: 4;
+    top: 68%;
+    left: 50%;
+    width: clamp(76px, 9.5vw, 120px);
+    border-radius: 6px;
+    box-shadow:
+      0 0 0 1px rgba(217, 161, 61, 0.75),
+      0 0 28px rgba(217, 161, 61, 0.45),
+      0 12px 36px rgba(0, 0, 0, 0.85);
+    line-height: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .wormhole-home__cover-cta img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: inherit;
+  }
+
+  .wormhole-home__card-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d9a13d;
+    color: #03050b;
+    font-family: Arial, sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+
+  .wormhole-home__cover-cta:hover,
+  .wormhole-home__cover-cta:focus-visible {
+    transform: translate(-50%, -50%) scale(1.6);
+    box-shadow:
+      0 0 0 2px rgba(245, 215, 127, 0.95),
+      0 0 40px rgba(217, 161, 61, 0.75),
+      0 16px 44px rgba(0, 0, 0, 0.95);
+  }
+
+  .wormhole-home__cover-cta:focus-visible {
+    outline: 2px solid #f4e6ca;
+    outline-offset: 4px;
+  }
+
+  /* Bottom Dock / Bar */
+  .wormhole-dock {
+    position: absolute;
+    z-index: 10;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(94%, 960px);
+    pointer-events: auto;
+  }
+
+  .wormhole-dock__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.25rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 9999px;
+    background: rgba(3, 5, 11, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(217, 161, 61, 0.35);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.75),
+      0 0 16px rgba(217, 161, 61, 0.15);
+  }
+
+  .wormhole-dock__callout {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.82rem;
+    color: rgba(244, 230, 202, 0.85);
+  }
+
+  .wormhole-dock__highlight {
+    color: #f5d77f;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 150ms ease;
+  }
+
+  .wormhole-dock__highlight:hover {
+    color: #ffffff;
+  }
+
+  .wormhole-dock__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .wormhole-dock__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #f4e6ca;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(244, 230, 202, 0.16);
+    text-decoration: none;
+    transition: all 180ms ease;
+  }
+
+  .wormhole-dock__btn:hover {
+    background: rgba(217, 161, 61, 0.22);
+    border-color: rgba(217, 161, 61, 0.6);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .wormhole-dock__btn--primary {
+    background: rgba(217, 161, 61, 0.25);
+    border-color: #d9a13d;
+    color: #f5d77f;
+  }
+
+  .wormhole-dock__btn--primary:hover {
+    background: #d9a13d;
+    color: #03050b;
+  }
+
+  .wormhole-dock__btn--subtle {
+    opacity: 0.7;
+    font-size: 0.7rem;
+  }
+
+  .dock-icon {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .wormhole-dock {
+      bottom: 0.75rem;
+      width: 96%;
+    }
+    .wormhole-dock__inner {
+      border-radius: 16px;
+      justify-content: center;
+      text-align: center;
+      padding: 0.65rem 0.85rem;
+    }
+    .wormhole-dock__callout {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.78rem;
+    }
+    .wormhole-dock__nav {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

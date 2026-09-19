@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+import CookieConsent from "../components/CookieConsent.astro";
+import Seo from "../components/Seo.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: "website" | "profile" | "article";
+  immersive?: boolean;
+  bookPage?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  image,
+  imageAlt,
+  ogType,
+  immersive = false,
+  bookPage = false,
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en" class:list={{ immersive, "book-page": bookPage }}>
+  <head>
+    <meta charset="UTF-8" />
+    <Seo
+      title={title}
+      description={description}
+      path={path}
+      image={image}
+      imageAlt={imageAlt}
+      ogType={ogType}
+    />
+    <slot name="head" />
+  </head>
+  <body class:list={{ immersive, "book-page": bookPage }}>
+    <main><slot /></main>
+    <CookieConsent />
+  </body>
+</html>

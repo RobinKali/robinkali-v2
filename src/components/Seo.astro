@@ -1,0 +1,85 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: "website" | "profile" | "article";
+}
+
+const {
+  title,
+  description,
+  path,
+  image = "/media/robin-kali-avatar.svg",
+  imageAlt = "Robin Kali - Developer & Creator",
+  ogType = "website",
+} = Astro.props;
+
+if (!Astro.site) throw new Error("Astro.site is required to generate SEO metadata");
+const siteUrl = Astro.site.toString().replace(/\/$/, "");
+const withTrailingSlash = (value: string) =>
+  value.endsWith("/") ? value : `${value}/`;
+const canonical = new URL(withTrailingSlash(path), `${siteUrl}/`).toString();
+const imageUrl = new URL(image, `${siteUrl}/`).toString();
+const pageId = `${canonical}#webpage`;
+const personId = `${siteUrl}/#person`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Robin Kali",
+      url: `${siteUrl}/`,
+      description: "Personal website & biography of Robin Kali — Developer & Creator.",
+      publisher: { "@id": personId },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: "Robin Kali",
+      jobTitle: "Developer & Creator",
+      url: `${siteUrl}/`,
+      sameAs: [
+        "https://github.com/RobinKali",
+        "https://www.linkedin.com/in/robinkali/",
+        "https://kaliwebworks.nl",
+      ],
+    },
+    {
+      "@type": "WebPage",
+      "@id": pageId,
+      url: canonical,
+      name: title,
+      description,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": personId },
+    },
+  ],
+};
+---
+<title>{title} — Robin Kali</title>
+<meta name="description" content={description} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="Robin Kali" />
+<meta property="og:title" content={`${title} — Robin Kali`} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+{imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={`${title} — Robin Kali`} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+{imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+<link rel="canonical" href={canonical} />
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(jsonLd)}
+/>
