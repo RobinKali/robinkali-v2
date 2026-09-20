@@ -12,7 +12,7 @@ const {
   title,
   description,
   path,
-  image = "/media/robin-kali-avatar.svg",
+  image = "/media/og-image.png",
   imageAlt = "Robin Kali - Developer & Creator",
   ogType = "website",
 } = Astro.props;
@@ -23,6 +23,7 @@ const withTrailingSlash = (value: string) =>
   value.endsWith("/") ? value : `${value}/`;
 const canonical = new URL(withTrailingSlash(path), `${siteUrl}/`).toString();
 const imageUrl = new URL(image, `${siteUrl}/`).toString();
+const isPng = imageUrl.endsWith(".png");
 const pageId = `${canonical}#webpage`;
 const personId = `${siteUrl}/#person`;
 
@@ -45,7 +46,7 @@ const jsonLd = {
       url: `${siteUrl}/`,
       sameAs: [
         "https://github.com/RobinKali",
-        "https://www.linkedin.com/in/robinkali/",
+        "https://www.linkedin.com/in/robin-kalaykhan-4b2443153/",
         "https://kaliwebworks.nl",
       ],
     },
@@ -64,19 +65,36 @@ const jsonLd = {
 <title>{title} — Robin Kali</title>
 <meta name="description" content={description} />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#030712" />
+<meta name="author" content="Robin Kali" />
+
+<!-- Favicon & Touch Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="alternate icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/media/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="Robin Kali" />
 <meta property="og:title" content={`${title} — Robin Kali`} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
+{isPng && <meta property="og:image:width" content="1200" />}
+{isPng && <meta property="og:image:height" content="630" />}
+{isPng && <meta property="og:image:type" content="image/png" />}
 {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 <meta property="og:locale" content="en_US" />
+
+<!-- Twitter / X Cards -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={`${title} — Robin Kali`} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
 {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+
 <link rel="canonical" href={canonical} />
 <script
   type="application/ld+json"

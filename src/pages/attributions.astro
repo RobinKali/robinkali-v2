@@ -9,23 +9,27 @@ const page = attributionDocument;
   description={page.description}
   path={page.path}
 >
-  <meta slot="head" name="robots" content="noindex, nofollow" />
-
   <article class="legal-page attribution-page" aria-labelledby="attribution-page-title">
     <header class="legal-page__header">
       <nav class="legal-page__breadcrumb" aria-label="Attributions navigation">
-        <a href="/">
+        <a href="/" class="legal-page__back">
           <span aria-hidden="true">←</span>
-          Back to Home
+          <span>Back to Home</span>
         </a>
         <span class="legal-page__breadcrumb-separator" aria-hidden="true">/</span>
-        <span aria-current="page">{page.title}</span>
+        <span aria-current="page" class="legal-page__current">{page.title}</span>
       </nav>
 
-      <p class="legal-page__status">{page.status}</p>
+      <div class="legal-page__eyebrow-wrapper">
+        <div class="legal-page__status">
+          <span class="legal-status-dot" aria-hidden="true"></span>
+          <span>{page.status}</span>
+        </div>
+        <span class="legal-page__identity">OPEN SOURCE &bull; {page.identity}</span>
+      </div>
+
       <h1 id="attribution-page-title" class="legal-page__title">{page.title}</h1>
       <p class="legal-page__lead">{page.description}</p>
-      <p class="legal-page__identity">{page.identity}</p>
     </header>
 
     <div class="legal-page__body">
@@ -43,51 +47,70 @@ const page = attributionDocument;
       </section>
 
       <section class="legal-page__section attribution-section">
-        <h2>Attributed works</h2>
-        <ul class="attribution-list">
+        <h2>Attributed Open-Source Works</h2>
+        <div class="attribution-grid">
           {page.projects.map((project) => (
-            <li class="attribution-card">
-              <h3>{project.name}</h3>
+            <div class="attribution-card">
+              <div class="attribution-card__header">
+                <span class="attribution-card__dot" aria-hidden="true"></span>
+                <h3>{project.name}</h3>
+                <span class="attribution-card__version">{project.version}</span>
+              </div>
               <dl class="attribution-card__meta">
-                <div>
-                  <dt>{project.authorLabel}:</dt>
+                <div class="attribution-meta-row">
+                  <dt>{project.authorLabel}</dt>
                   <dd>{project.author}</dd>
                 </div>
-                <div>
-                  <dt>{project.versionLabel}:</dt>
-                  <dd>{project.version}</dd>
+                <div class="attribution-meta-row">
+                  <dt>{project.useLabel}</dt>
+                  <dd>{project.use}</dd>
                 </div>
-                <div>
-                  <dt>{project.repositoryLabel}:</dt>
+                <div class="attribution-meta-row">
+                  <dt>{project.licenseLabel}</dt>
+                  <dd><span class="attribution-license-badge">{project.license}</span></dd>
+                </div>
+                <div class="attribution-meta-row">
+                  <dt>{project.repositoryLabel}</dt>
                   <dd>
-                    <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
-                      {project.repositoryText}
+                    <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer" class="attribution-link">
+                      <span>{project.repositoryText}</span>
+                      <span aria-hidden="true">&rarr;</span>
                     </a>
                   </dd>
                 </div>
-                <div>
-                  <dt>{project.useLabel}:</dt>
-                  <dd>{project.use}</dd>
-                </div>
-                <div>
-                  <dt>{project.licenseLabel}:</dt>
-                  <dd>{project.license}</dd>
-                </div>
               </dl>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       <section class="legal-page__section">
         <h2>{page.license.heading}</h2>
         <p>{page.license.introduction}</p>
-        <h3>{page.license.copyrightHeading}</h3>
-        {page.license.copyrightLines.map((line) => (
-          <p class="attribution-legal__line">{line}</p>
-        ))}
+        <h3 class="legal-page__subheading">{page.license.copyrightHeading}</h3>
+        <div class="attribution-copyright-list">
+          {page.license.copyrightLines.map((line) => (
+            <p class="attribution-legal__line">{line}</p>
+          ))}
+        </div>
         <pre class="legal-page__pre"><code>{page.license.text}</code></pre>
       </section>
     </div>
+
+    <!-- Quick Legal Document Switcher Footer -->
+    <footer class="legal-page__footer">
+      <div class="legal-page__footer-nav-label">DISCLOSURES &bull; POLICIES</div>
+      <nav class="legal-page__footer-nav" aria-label="Legal navigation switcher">
+        <a href="/legal/legal-notice/">Legal Notice</a>
+        <a href="/legal/privacy/">Privacy Policy</a>
+        <a href="/legal/cookies/">Cookie Policy</a>
+        <a href="/legal/terms/">Terms of Use</a>
+        <a href="/attributions/" class="active">Credits &amp; Attributions</a>
+      </nav>
+      <div class="legal-page__footer-bottom">
+        <span>&copy; {new Date().getFullYear()} Robin Kali. All rights reserved.</span>
+        <a href="/about/" class="legal-page__footer-link">View Creative Profile &rarr;</a>
+      </div>
+    </footer>
   </article>
 </BaseLayout>

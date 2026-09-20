@@ -4,12 +4,16 @@ import { profile } from "../data/profile";
 
 const pageTitle = "About";
 const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A concise biography, background, core technologies, and contact info.`;
+
+const secureEmail = Buffer.from(profile.socials.email).toString("base64");
+const secureWhatsapp = Buffer.from(profile.socials.whatsapp).toString("base64");
 ---
+
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
   path="/about/"
-  image={profile.avatar}
+  image={profile.ogImage}
   imageAlt={profile.avatarAlt}
   bookPage
 >
@@ -20,8 +24,7 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
       src="/wormhole-home.html"
       title="Space scene"
       aria-hidden="true"
-      tabindex="-1"
-    ></iframe>
+      tabindex="-1"></iframe>
 
     <div class="about-page">
       <!-- Top Navigation Header -->
@@ -32,7 +35,7 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
             <span>Back to Space</span>
           </a>
           <span class="about-nav-divider" aria-hidden="true">/</span>
-          <span class="about-nav-current" aria-current="page">Profile Dossier</span>
+          <span class="about-nav-current" aria-current="page">Profile</span>
         </nav>
       </header>
 
@@ -43,106 +46,148 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
           <!-- Glowing Eyebrow Pill -->
           <div class="about-eyebrow-pill">
             <span class="about-eyebrow-dot" aria-hidden="true"></span>
-            <span>BIOGRAPHY &bull; CREATIVE PROFILE</span>
+            <span>CREATIVE PROFILE</span>
           </div>
 
-            <h1 class="about-title">{profile.name}</h1>
-            <p class="about-role">{profile.role}</p>
-            <p class="about-tagline">{profile.tagline}</p>
+          <h1 class="about-title">{profile.name}</h1>
+          <p class="about-role">{profile.role}</p>
+          <p class="about-tagline">{profile.tagline}</p>
 
-            <!-- Bio Paragraphs -->
-            <div class="about-paragraphs">
-              {profile.bio.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
+          <!-- Bio Paragraphs -->
+          <div class="about-paragraphs">
+            {profile.bio.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+
+          <!-- Quick Metadata / Facts Chips -->
+          <div class="about-facts">
+            <div class="about-fact-item">
+              <span class="about-fact-label">Location</span>
+              <span class="about-fact-value">Netherlands</span>
             </div>
-
-            <!-- Quick Metadata / Facts Chips -->
-            <div class="about-facts">
-              <div class="about-fact-item">
-                <span class="about-fact-label">Location</span>
-                <span class="about-fact-value">Netherlands</span>
-              </div>
-              <div class="about-fact-item">
-                <span class="about-fact-label">Specialization</span>
-                <span class="about-fact-value">Web &bull; Design &bull; Media</span>
-              </div>
-              <div class="about-fact-item">
-                <span class="about-fact-label">Studio</span>
-                <a
-                  href={profile.callout.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="about-fact-value about-fact-link"
-                >
-                  KaliWebWorks
-                </a>
-              </div>
-              <div class="about-fact-item">
-                <span class="about-fact-label">Status</span>
-                <span class="about-fact-value about-status-badge">
-                  <span class="about-status-dot" aria-hidden="true"></span>
-                  Available
-                </span>
-              </div>
+            <div class="about-fact-item">
+              <span class="about-fact-label">Expertise</span>
+              <span class="about-fact-value"
+                >Webdesign &bull; Online Marketing</span
+              >
             </div>
-
-            <!-- Direct Action Buttons -->
-            <div class="about-actions">
+            <div class="about-fact-item">
+              <span class="about-fact-label">Studio</span>
               <a
-                href={profile.socials.github}
+                href={profile.callout.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="about-btn"
+                class="about-fact-value about-fact-link"
+                title="Visit Kali Web Works (opens in a new tab)"
               >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                <span>Kali Web Works</span>
+                <svg class="fact-link-arrow" viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 9.5l7-7m0 0H4.5m5 0V7.5" />
                 </svg>
-                <span>GitHub</span>
-              </a>
-              <a
-                href={profile.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="about-btn"
-              >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href={profile.socials.email}
-                class="about-btn about-btn--primary"
-              >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                  <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"/>
-                </svg>
-                <span>Get in Touch</span>
               </a>
             </div>
           </div>
+
+          <!-- Direct Action Buttons -->
+          <div class="about-actions">
+            <a
+              href={profile.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                ></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href={profile.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-btn"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                ></path>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="#"
+              data-secure-contact={secureWhatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-btn"
+              aria-label="WhatsApp"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.276-.1-.477-.15-.678.15-.2.301-.778.979-.954 1.18-.175.2-.351.226-.652.075-.3-.15-1.268-.468-2.416-1.492-.894-.797-1.497-1.782-1.673-2.083-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.2-.301.301-.502.101-.2.05-.376-.025-.526-.075-.15-.678-1.634-.929-2.238-.244-.589-.493-.509-.678-.518-.175-.009-.376-.01-.577-.01-.2 0-.526.075-.802.376-.276.301-1.053 1.029-1.053 2.509 0 1.48 1.078 2.909 1.229 3.11.15.201 2.122 3.24 5.141 4.544.718.31 1.278.496 1.716.635.722.23 1.378.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.076-.125-.276-.2-.577-.35zM12.04 21.75h-.008a9.71 9.71 0 01-4.954-1.354l-.355-.21-3.684.966.983-3.593-.231-.368A9.707 9.707 0 012.33 12.04C2.33 6.69 6.69 2.33 12.04 2.33c2.597 0 5.039 1.012 6.876 2.85a9.67 9.67 0 012.85 6.86c0 5.352-4.36 9.71-9.726 9.71zm8.288-16.598A11.667 11.667 0 0012.04.33C5.586.33.33 5.586.33 12.04c0 2.063.538 4.078 1.56 5.855L0 24l6.273-1.645a11.688 11.688 0 005.767 1.517h.005c6.452 0 11.71-5.257 11.71-11.712a11.64 11.64 0 00-3.427-8.308z"
+                ></path>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+            <a
+              href="#"
+              data-secure-contact={secureEmail}
+              class="about-btn about-btn--primary"
+              aria-label="Send an Email"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path
+                  d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"
+                ></path>
+              </svg>
+              <span>Get in Touch</span>
+            </a>
+          </div>
+        </div>
 
         <!-- Skills & Technology Stack -->
         <section class="about-section about-skills">
           <div class="about-section-header">
-            <span class="about-section-badge">TOOLING &bull; EXPERTISE</span>
-            <h2 class="about-section-title">Core Disciplines &amp; Tooling</h2>
+            <span class="about-section-badge">TECH &bull; STACK</span>
+            <h2 class="about-section-title">Tooling</h2>
           </div>
           <div class="skills-grid">
-            {profile.skills.map((group) => (
-              <div class="skills-card">
-                <div class="skills-card-header">
-                  <span class="skills-card-dot" aria-hidden="true"></span>
-                  <h3 class="skills-card-title">{group.category}</h3>
+            {
+              profile.skills.map((group) => (
+                <div class="skills-card">
+                  <div class="skills-card-header">
+                    <span class="skills-card-dot" aria-hidden="true" />
+                    <h3 class="skills-card-title">{group.category}</h3>
+                  </div>
+                  <ul class="skills-list">
+                    {group.items.map((item) => (
+                      <li class="skills-pill">{item}</li>
+                    ))}
+                  </ul>
                 </div>
-                <ul class="skills-list">
-                  {group.items.map((item) => (
-                    <li class="skills-pill">{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </section>
 
@@ -153,20 +198,26 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
             <div class="blog-preview-badge">UPCOMING FEATURE</div>
             <h2 class="blog-preview-title">{profile.blog.title}</h2>
             <p class="blog-preview-desc">{profile.blog.description}</p>
-            <div class="blog-preview-status">
-              <span class="pulse-dot" aria-hidden="true"></span>
-              <span>{profile.blog.status}</span>
-            </div>
+            {
+              profile.blog.status && (
+                <div class="blog-preview-status">
+                  <span class="pulse-dot" aria-hidden="true" />
+                  <span>{profile.blog.status}</span>
+                </div>
+              )
+            }
           </div>
         </section>
 
-        <!-- Footer Callout: KaliWebWorks -->
+        <!-- Footer Callout: Kali Web Works -->
         <footer class="about-footer-banner">
           <div class="about-footer-inner">
             <div class="about-footer-text">
               <span class="about-footer-badge">STUDIO</span>
               <span class="about-footer-heading">{profile.callout.text}</span>
-              <span class="about-footer-sub">Explore bespoke digital development and web craft at KaliWebWorks.</span>
+              <span class="about-footer-sub"
+                >Digital design &amp; web development studio. Kali Web Works.</span
+              >
             </div>
             <a
               href={profile.callout.url}
@@ -179,7 +230,10 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
             </a>
           </div>
           <div class="about-footer-legal">
-            <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
+            <span
+              >&copy; {new Date().getFullYear()}
+              {profile.name}. All rights reserved.</span
+            >
             <div class="about-footer-links">
               <a href="/legal/legal-notice/">Legal Notice</a>
               <a href="/legal/privacy/">Privacy</a>
@@ -206,7 +260,13 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     margin: 0 auto;
     padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
     color: #f1f5f9;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     animation: space-arrival 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
@@ -398,39 +458,29 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
   }
 
   .about-fact-link {
-    color: #c084fc;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color 160ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #f1f5f9;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fact-link-arrow {
+    color: #38bdf8;
+    opacity: 0.8;
+    transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
   }
 
   .about-fact-link:hover {
-    color: #e9d5ff;
-    text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+    color: #38bdf8;
   }
 
-  .about-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #4ade80;
-    font-weight: 600;
+  .about-fact-link:hover .fact-link-arrow {
+    transform: translate(2px, -2px);
+    opacity: 1;
+    color: #00f2fe;
   }
-
-  .about-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 8px #4ade80;
-    animation: statusPulse 2s infinite ease-in-out;
-  }
-
-  @keyframes statusPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.85); }
-  }
-
   /* Direct Action Buttons (Pill Shapes) */
   .about-actions {
     display: flex;
@@ -526,7 +576,10 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     box-shadow:
       0 12px 32px rgba(0, 0, 0, 0.6),
       0 0 25px rgba(0, 242, 254, 0.08);
-    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+    transition:
+      transform 260ms ease,
+      border-color 260ms ease,
+      box-shadow 260ms ease;
   }
 
   .skills-card:hover {
@@ -596,7 +649,11 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     overflow: hidden;
     padding: clamp(2rem, 4vw, 2.75rem);
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(12, 18, 38, 0.78) 0%, rgba(8, 12, 26, 0.9) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(12, 18, 38, 0.78) 0%,
+      rgba(8, 12, 26, 0.9) 100%
+    );
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px dashed rgba(168, 85, 247, 0.45);
@@ -612,7 +669,11 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     width: 350px;
     height: 350px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.18), transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(168, 85, 247, 0.18),
+      transparent 70%
+    );
     pointer-events: none;
   }
 
@@ -668,11 +729,18 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
   }
 
   @keyframes cyanPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.35; transform: scale(0.85); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.85);
+    }
   }
 
-  /* Footer Banner (KaliWebWorks) */
+  /* Footer Banner (Kali Web Works) */
   .about-footer-banner {
     margin-top: 5rem;
     padding-top: 2.5rem;
@@ -687,7 +755,11 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     gap: 1.75rem;
     padding: 2.25rem clamp(1.5rem, 3vw, 2.5rem);
     border-radius: 24px;
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.12) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(6, 182, 212, 0.1) 0%,
+      rgba(139, 92, 246, 0.12) 100%
+    );
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid rgba(0, 242, 254, 0.28);
@@ -811,4 +883,3 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     }
   }
 </style>
-

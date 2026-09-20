@@ -17,23 +17,27 @@ const isCookiePolicy = page.slug === "cookies";
   description={page.description}
   path={page.path}
 >
-  <meta slot="head" name="robots" content="noindex, nofollow" />
-
   <article class="legal-page" aria-labelledby="legal-page-title">
     <header class="legal-page__header">
       <nav class="legal-page__breadcrumb" aria-label="Legal document navigation">
-        <a href="/">
+        <a href="/" class="legal-page__back">
           <span aria-hidden="true">←</span>
-          Back to Home
+          <span>Back to Home</span>
         </a>
         <span class="legal-page__breadcrumb-separator" aria-hidden="true">/</span>
-        <span aria-current="page">{page.title}</span>
+        <span aria-current="page" class="legal-page__current">{page.title}</span>
       </nav>
 
-      <p class="legal-page__status">{page.status}</p>
+      <div class="legal-page__eyebrow-wrapper">
+        <div class="legal-page__status">
+          <span class="legal-status-dot" aria-hidden="true"></span>
+          <span>{page.status}</span>
+        </div>
+        <span class="legal-page__identity">ROBIN KALI &bull; KALI WEB WORKS</span>
+      </div>
+
       <h1 id="legal-page-title" class="legal-page__title">{page.title}</h1>
       <p class="legal-page__lead">{page.description}</p>
-      <p class="legal-page__identity">ROBIN KALI</p>
     </header>
 
     <div class="legal-page__body">
@@ -44,7 +48,7 @@ const isCookiePolicy = page.slug === "cookies";
             <p>{paragraph}</p>
           ))}
           {section.items && (
-            <ul>
+            <ul class="legal-page__list">
               {section.items.map((item) => (
                 <li>{item}</li>
               ))}
@@ -55,13 +59,29 @@ const isCookiePolicy = page.slug === "cookies";
 
       {isCookiePolicy && (
         <section class="legal-page__section legal-page__actions">
-          <h2>Cookie Settings</h2>
-          <p>You can reset your cookie consent choice at any time.</p>
-          <button type="button" class="button" data-cookie-consent-reset>
+          <h2>Cookie Settings &amp; Preferences</h2>
+          <p>You can reset your cookie consent choice and purge saved local storage tokens at any time.</p>
+          <button type="button" class="legal-btn--primary" data-cookie-consent-reset>
             Reset Cookie Consent
           </button>
         </section>
       )}
     </div>
+
+    <!-- Quick Legal Document Switcher Footer -->
+    <footer class="legal-page__footer">
+      <div class="legal-page__footer-nav-label">DISCLOSURES &bull; POLICIES</div>
+      <nav class="legal-page__footer-nav" aria-label="Legal navigation switcher">
+        <a href="/legal/legal-notice/" class:list={{ active: page.slug === "legal-notice" }}>Legal Notice</a>
+        <a href="/legal/privacy/" class:list={{ active: page.slug === "privacy" }}>Privacy Policy</a>
+        <a href="/legal/cookies/" class:list={{ active: page.slug === "cookies" }}>Cookie Policy</a>
+        <a href="/legal/terms/" class:list={{ active: page.slug === "terms" }}>Terms of Use</a>
+        <a href="/attributions/">Credits &amp; Attributions</a>
+      </nav>
+      <div class="legal-page__footer-bottom">
+        <span>&copy; {new Date().getFullYear()} Robin Kali. All rights reserved.</span>
+        <a href="/about/" class="legal-page__footer-link">View Creative Profile &rarr;</a>
+      </div>
+    </footer>
   </article>
 </BaseLayout>

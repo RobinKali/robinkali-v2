@@ -9,6 +9,8 @@
     <base href="/vendor/wormhole-extreme/" />
     <meta name="description" id="description" content="Interactive 3D space scene rendered with Three.js and WebGL." />
     <meta name="author" content="Robin Kali | https://github.com/RobinKali" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
 
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link type="text/css" rel="stylesheet" href="/vendor/wormhole-extreme/dist/css/bundle.min.css" />
@@ -64,19 +66,20 @@
             content: "✦";
             font-size: 1.1em;
             margin-right: 8px !important;
-            color: #f5d77f;
+            color: #22d3ee;
         }
 
         .wormhole-btn-gold {
-            border-color: rgba(217, 161, 61, 0.6) !important;
-            background: rgba(217, 161, 61, 0.15) !important;
-            color: #f5d77f !important;
+            border-color: rgba(0, 242, 254, 0.45) !important;
+            background: rgba(0, 242, 254, 0.12) !important;
+            color: #22d3ee !important;
         }
 
         .wormhole-btn-gold:hover {
-            background: rgba(217, 161, 61, 0.4) !important;
-            border-color: #f5d77f !important;
+            background: rgba(168, 85, 247, 0.3) !important;
+            border-color: #c084fc !important;
             color: #ffffff !important;
+            box-shadow: 0 0 16px rgba(168, 85, 247, 0.5) !important;
         }
     </style>
 </head>
@@ -101,16 +104,54 @@
 
     <div class="share center animated zoomInUp" style="display: none">
         <a class="btn icon-github icon-trim" href="https://github.com/RobinKali" target="_top" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><span>GitHub</span></a> &nbsp;
-        <a class="btn icon-linkedin icon-trim" href="https://www.linkedin.com/in/robinkali/" target="_top" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><span>LinkedIn</span></a> &nbsp;
-        <a class="btn icon-mail icon-trim" href="mailto:info@kaliwebworks.nl" target="_top" rel="noopener noreferrer" aria-label="Email" title="Email"><span>Email</span></a> &nbsp;
-        <a class="btn icon-globe icon-trim wormhole-btn-gold" href="https://kaliwebworks.nl" target="_top" rel="noopener noreferrer" aria-label="KaliWebWorks" title="Visit kaliwebworks.nl"><span>kaliwebworks.nl</span></a> &nbsp;
+        <a class="btn icon-linkedin icon-trim" href="https://www.linkedin.com/in/robin-kalaykhan-4b2443153/" target="_top" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><span>LinkedIn</span></a> &nbsp;
+        <a class="btn icon-mail icon-trim" href="#" data-secure-contact="bWFpbHRvOmluZm9Aa2FsaXdlYndvcmtzLm5s" target="_top" rel="noopener noreferrer" aria-label="Email" title="Email"><span>Email</span></a> &nbsp;
+        <a class="btn icon-globe icon-trim wormhole-btn-gold" href="https://kaliwebworks.nl" target="_top" rel="noopener noreferrer" aria-label="Kali Web Works" title="Visit kaliwebworks.nl"><span>kaliwebworks.nl</span></a> &nbsp;
         <a class="btn icon-trim" href="/attributions/" target="_top" rel="noopener noreferrer" aria-label="Credits" title="Credits & Attributions"><span>Credits</span></a>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
-    <script src="/vendor/wormhole-extreme/dist/js/polyfills.js"></script>
-    <script src="/vendor/wormhole-extreme/dist/js/bundle.min.js"></script>
-    <script src="/vendor/wormhole-extreme/dist/js/app.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
+    <script defer src="/vendor/wormhole-extreme/dist/js/polyfills.js"></script>
+    <script defer src="/vendor/wormhole-extreme/dist/js/bundle.min.js"></script>
+    <script defer src="/vendor/wormhole-extreme/dist/js/app.js"></script>
+    <script>
+      (function() {
+        function initSecure() {
+          var links = document.querySelectorAll('a[data-secure-contact]');
+          links.forEach(function(el) {
+            function unlock() {
+              var enc = el.getAttribute('data-secure-contact');
+              if (enc && !el.dataset.unlocked) {
+                el.dataset.unlocked = 'true';
+                try { el.href = atob(enc); } catch(e) {}
+              }
+            }
+            el.addEventListener('pointerenter', unlock);
+            el.addEventListener('focus', unlock);
+            el.addEventListener('touchstart', unlock);
+            el.addEventListener('mousedown', unlock);
+            el.addEventListener('click', function(e) {
+              unlock();
+              var h = el.getAttribute('href');
+              if (h && h !== '#') {
+                if (el.getAttribute('target') === '_top') {
+                  top.location.href = h;
+                  e.preventDefault();
+                } else if (el.getAttribute('target') === '_blank') {
+                  window.open(h, '_blank', 'noopener,noreferrer');
+                  e.preventDefault();
+                }
+              }
+            });
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initSecure);
+        } else {
+          initSecure();
+        }
+      })();
+    </script>
 
 </body>
 </html>

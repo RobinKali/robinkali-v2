@@ -1,1 +1,5 @@
-/ /es/ 301
+# Redirect legacy bilingual URLs to canonical root
+/es/              /          301
+/en/              /          301
+/es/*             /:splat    301
+/en/*             /:splat    301
