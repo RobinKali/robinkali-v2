@@ -34,27 +34,35 @@ export interface ProfileData {
 
 export const profile: ProfileData = {
   name: "Robin Kali",
-  role: "Developer & Creator",
-  tagline: "Exploring modern web engineering, interactive 3D, and bespoke digital experiences.",
+  role: "Developer & Designer",
+  tagline: "Exploring modern web engineering ai development and bespoke digital experiences.",
   avatar: "/media/robin-kali-avatar.svg",
   avatarAlt: "Robin Kali - Developer & Creator",
   bio: [
     "Hi, I'm Robin Kali. I build modern, fast, and visually engaging web applications with an eye for detail, clean architecture, and dynamic user interfaces.",
-    "Driven by curiosity and craftsmanship, I explore the intersections of modern frontend technologies, WebGL, and elegant digital products.",
-    "When I'm not coding or exploring new tech stacks, I'm working with clients through KaliWebWorks to build standout websites tailored to their vision.",
+    "I also have severe experience in AV installations, video editing, motion graphics and all things creative.",
   ],
   skills: [
     {
       category: "Frontend & Web",
-      items: ["Astro", "TypeScript", "JavaScript", "HTML5 & Modern CSS", "Vite", "Responsive Design"],
+      items: ["Astro", "TypeScript", "JavaScript", "HTML5", "Vite", "React", "Vue", "next.js", "TailwindCSS"],
     },
     {
-      category: "Interactive & 3D",
-      items: ["Three.js", "WebGL Shaders", "Canvas Animations", "Micro-interactions"],
+      category: "Design & Digital Media",
+      items: [
+        "Figma",
+        "Canva",
+        "Photoshop",
+        "Illustrator",
+        "UI/UX Design",
+        "Motion Graphics",
+        "Video Editing",
+        "Brand Identity",
+      ],
     },
     {
       category: "Ecosystem & Architecture",
-      items: ["Git & GitHub", "Node.js", "Static Site Generation", "Headless CMS (Upcoming)", "Performance & SEO"],
+      items: ["Git & GitHub", "Node.js", "Static Site Generation", "Headless CMS", "Performance & SEO"],
     },
   ],
   socials: {
