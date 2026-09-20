@@ -13,398 +13,503 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
   imageAlt={profile.avatarAlt}
   bookPage
 >
-  <div class="about-page">
-    <!-- Top Navigation Header -->
-    <header class="about-header">
-      <nav class="about-nav" aria-label="Page navigation">
-        <a href="/" class="about-back">
-          <span aria-hidden="true">←</span>
-          <span>Back to Space</span>
-        </a>
-        <span class="about-nav-divider" aria-hidden="true">/</span>
-        <span class="about-nav-current" aria-current="page">About</span>
-      </nav>
-    </header>
+  <div class="book-landing-shell">
+    <iframe
+      class="book-landing__frame"
+      data-book-wormhole-frame
+      src="/wormhole-home.html"
+      title="Space scene"
+      aria-hidden="true"
+      tabindex="-1"
+    ></iframe>
 
-    <!-- Main Editorial Bio Article -->
-    <article class="about-main">
-      <div class="about-grid">
-        <!-- Visual Portrait / Card Column -->
-        <div class="about-visual">
-          <div class="about-card-wrapper">
-            <img
-              src={profile.avatar}
-              alt={profile.avatarAlt}
-              width="600"
-              height="900"
-              class="about-card-img"
-              loading="eager"
-            />
-          </div>
-        </div>
+    <div class="about-page">
+      <!-- Top Navigation Header -->
+      <header class="about-header">
+        <nav class="about-nav" aria-label="Page navigation">
+          <a href="/" class="about-back">
+            <span class="about-back__icon" aria-hidden="true">←</span>
+            <span>Back to Space</span>
+          </a>
+          <span class="about-nav-divider" aria-hidden="true">/</span>
+          <span class="about-nav-current" aria-current="page">Profile Dossier</span>
+        </nav>
+      </header>
 
-        <!-- Copy & Dossier Column -->
+      <!-- Main Profile & Bio Article -->
+      <article class="about-main">
+        <!-- Copy & Dossier Hero (Full Width) -->
         <div class="about-copy">
-          <p class="about-eyebrow">BIOGRAPHY &bull; CREATIVE PROFILE</p>
-          <h1 class="about-title">{profile.name}</h1>
-          <p class="about-role">{profile.role}</p>
-          <p class="about-tagline">{profile.tagline}</p>
-
-          <!-- Bio Paragraphs -->
-          <div class="about-paragraphs">
-            {profile.bio.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
+          <!-- Glowing Eyebrow Pill -->
+          <div class="about-eyebrow-pill">
+            <span class="about-eyebrow-dot" aria-hidden="true"></span>
+            <span>BIOGRAPHY &bull; CREATIVE PROFILE</span>
           </div>
 
-          <!-- Quick Metadata / Facts -->
-          <div class="about-facts">
-            <div class="about-fact-item">
-              <span class="about-fact-label">Location</span>
-              <span class="about-fact-value">Netherlands</span>
+            <h1 class="about-title">{profile.name}</h1>
+            <p class="about-role">{profile.role}</p>
+            <p class="about-tagline">{profile.tagline}</p>
+
+            <!-- Bio Paragraphs -->
+            <div class="about-paragraphs">
+              {profile.bio.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
             </div>
-            <div class="about-fact-item">
-              <span class="about-fact-label">Specialization</span>
-              <span class="about-fact-value">Web Engineering &amp; 3D</span>
+
+            <!-- Quick Metadata / Facts Chips -->
+            <div class="about-facts">
+              <div class="about-fact-item">
+                <span class="about-fact-label">Location</span>
+                <span class="about-fact-value">Netherlands</span>
+              </div>
+              <div class="about-fact-item">
+                <span class="about-fact-label">Specialization</span>
+                <span class="about-fact-value">Web &bull; 3D &bull; Frontend</span>
+              </div>
+              <div class="about-fact-item">
+                <span class="about-fact-label">Studio</span>
+                <a
+                  href={profile.callout.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="about-fact-value about-fact-link"
+                >
+                  KaliWebWorks
+                </a>
+              </div>
+              <div class="about-fact-item">
+                <span class="about-fact-label">Status</span>
+                <span class="about-fact-value about-status-badge">
+                  <span class="about-status-dot" aria-hidden="true"></span>
+                  Available
+                </span>
+              </div>
             </div>
-            <div class="about-fact-item">
-              <span class="about-fact-label">Studio</span>
+
+            <!-- Direct Action Buttons -->
+            <div class="about-actions">
               <a
-                href={profile.callout.url}
+                href={profile.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="about-fact-value about-fact-link"
+                class="about-btn"
               >
-                KaliWebWorks
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a
+                href={profile.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="about-btn"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href={profile.socials.email}
+                class="about-btn about-btn--primary"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"/>
+                </svg>
+                <span>Get in Touch</span>
               </a>
             </div>
-            <div class="about-fact-item">
-              <span class="about-fact-label">Status</span>
-              <span class="about-fact-value about-status-badge">Available for Projects</span>
+          </div>
+
+        <!-- Skills & Technology Stack -->
+        <section class="about-section about-skills">
+          <div class="about-section-header">
+            <span class="about-section-badge">TOOLING &bull; EXPERTISE</span>
+            <h2 class="about-section-title">Core Disciplines &amp; Tooling</h2>
+          </div>
+          <div class="skills-grid">
+            {profile.skills.map((group) => (
+              <div class="skills-card">
+                <div class="skills-card-header">
+                  <span class="skills-card-dot" aria-hidden="true"></span>
+                  <h3 class="skills-card-title">{group.category}</h3>
+                </div>
+                <ul class="skills-list">
+                  {group.items.map((item) => (
+                    <li class="skills-pill">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- CMS Blog Readiness Placeholder Section -->
+        <section class="about-section about-blog-preview">
+          <div class="blog-preview-card">
+            <div class="blog-preview-glow" aria-hidden="true"></div>
+            <div class="blog-preview-badge">UPCOMING FEATURE</div>
+            <h2 class="blog-preview-title">{profile.blog.title}</h2>
+            <p class="blog-preview-desc">{profile.blog.description}</p>
+            <div class="blog-preview-status">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span>{profile.blog.status}</span>
             </div>
           </div>
+        </section>
 
-          <!-- Direct Actions -->
-          <div class="about-actions">
-            <a
-              href={profile.socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="about-btn"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>GitHub</span>
-            </a>
-            <a
-              href={profile.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="about-btn"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={profile.socials.email}
-              class="about-btn about-btn--primary"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.522 7.717 9.478-7.682v11.782h-19z"/>
-              </svg>
-              <span>Get in Touch</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Skills & Technology Stack -->
-      <section class="about-section about-skills">
-        <h2 class="about-section-title">Core Disciplines &amp; Tooling</h2>
-        <div class="skills-grid">
-          {profile.skills.map((group) => (
-            <div class="skills-card">
-              <h3 class="skills-card-title">{group.category}</h3>
-              <ul class="skills-list">
-                {group.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
+        <!-- Footer Callout: KaliWebWorks -->
+        <footer class="about-footer-banner">
+          <div class="about-footer-inner">
+            <div class="about-footer-text">
+              <span class="about-footer-badge">STUDIO</span>
+              <span class="about-footer-heading">{profile.callout.text}</span>
+              <span class="about-footer-sub">Explore bespoke digital development and web craft at KaliWebWorks.</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- CMS Blog Readiness Placeholder Section -->
-      <section class="about-section about-blog-preview">
-        <div class="blog-preview-card">
-          <div class="blog-preview-badge">UPCOMING</div>
-          <h2 class="blog-preview-title">{profile.blog.title}</h2>
-          <p class="blog-preview-desc">{profile.blog.description}</p>
-          <div class="blog-preview-status">
-            <span class="pulse-dot"></span>
-            <span>{profile.blog.status}</span>
+            <a
+              href={profile.callout.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="about-footer-cta"
+            >
+              <span>{profile.callout.linkText}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
-        </div>
-      </section>
-
-      <!-- Footer Callout: KaliWebWorks -->
-      <footer class="about-footer-banner">
-        <div class="about-footer-inner">
-          <div class="about-footer-text">
-            <span class="about-footer-heading">{profile.callout.text}</span>
-            <span class="about-footer-sub">Explore bespoke digital development and web craft at KaliWebWorks.</span>
+          <div class="about-footer-legal">
+            <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
+            <div class="about-footer-links">
+              <a href="/legal/legal-notice/">Legal Notice</a>
+              <a href="/legal/privacy/">Privacy</a>
+              <a href="/legal/cookies/">Cookies</a>
+              <a href="/attributions/">Credits</a>
+            </div>
           </div>
-          <a
-            href={profile.callout.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="about-footer-cta"
-          >
-            {profile.callout.linkText}
-          </a>
-        </div>
-        <div class="about-footer-legal">
-          <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
-          <div class="about-footer-links">
-            <a href="/legal/legal-notice/">Legal Notice</a>
-            <a href="/legal/privacy/">Privacy</a>
-            <a href="/legal/cookies/">Cookies</a>
-            <a href="/attributions/">Credits</a>
-          </div>
-        </div>
-      </footer>
-    </article>
+        </footer>
+      </article>
+    </div>
   </div>
+  <script src="../scripts/book-landing.ts"></script>
 </BaseLayout>
 
 <style>
+  /* ==========================================================================
+     About Page - Modern Rounded Theme with Cyan & Purple Glow
+     ========================================================================== */
+
   .about-page {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem);
-    color: #f4e6ca;
+    color: #f1f5f9;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    animation: space-arrival 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  @keyframes space-arrival {
+    0% {
+      opacity: 0;
+      transform: scale(0.96) translateY(24px);
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-page {
+      animation: none;
+    }
+  }
+
+  /* Top Navigation Pill */
   .about-header {
     margin-bottom: 2.5rem;
   }
 
   .about-nav {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    font-family: Arial, sans-serif;
+    padding: 0.5rem 1.15rem;
+    border-radius: 9999px;
+    background: rgba(6, 11, 25, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     font-size: 0.85rem;
-    color: rgba(244, 230, 202, 0.7);
+    color: rgba(241, 245, 249, 0.7);
   }
 
   .about-back {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    color: #d9a13d;
+    gap: 0.45rem;
+    color: #22d3ee;
     text-decoration: none;
     font-weight: 600;
-    transition: color 150ms ease;
+    transition: all 180ms ease;
+  }
+
+  .about-back__icon {
+    font-size: 1rem;
+    transition: transform 180ms ease;
   }
 
   .about-back:hover {
-    color: #f5d77f;
+    color: #38bdf8;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  }
+
+  .about-back:hover .about-back__icon {
+    transform: translateX(-3px);
   }
 
   .about-nav-divider {
-    opacity: 0.4;
+    opacity: 0.35;
+    color: #94a3b8;
   }
 
   .about-nav-current {
-    color: #f4e6ca;
+    color: #cbd5e1;
+    font-weight: 500;
   }
 
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(260px, 380px) 1fr;
-    gap: clamp(2rem, 6vw, 5rem);
-    align-items: start;
-    margin-bottom: 4rem;
-  }
-
-  .about-visual {
-    position: sticky;
-    top: 2rem;
-  }
-
-  .about-card-wrapper {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(217, 161, 61, 0.4),
-      0 16px 40px rgba(0, 0, 0, 0.8),
-      0 0 30px rgba(217, 161, 61, 0.15);
-    background: #080d19;
-  }
-
-  .about-card-img {
-    display: block;
+  /* Main Hero Profile Card (Full Width) */
+  .about-copy {
     width: 100%;
-    height: auto;
-    border-radius: inherit;
-    transition: transform 300ms ease;
+    margin-bottom: 4rem;
+    padding: clamp(2rem, 4.5vw, 3.5rem);
+    border-radius: 28px;
+    background: rgba(6, 11, 25, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 242, 254, 0.24);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.75),
+      0 0 45px rgba(168, 85, 247, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
-  .about-card-wrapper:hover .about-card-img {
-    transform: scale(1.02);
-  }
-
-  .about-eyebrow {
-    margin: 0 0 0.75rem;
-    color: #d9a13d;
-    font-family: Arial, sans-serif;
-    font-size: 0.75rem;
+  /* Eyebrow Pill */
+  .about-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    color: #22d3ee;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.25rem;
   }
 
+  .about-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00f2fe;
+    box-shadow: 0 0 8px #00f2fe;
+  }
+
+  /* Title with Gradient Text */
   .about-title {
     margin: 0 0 0.4rem;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 400;
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    font-weight: 800;
     line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: #f4e6ca;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #ffffff 20%, #38bdf8 60%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(56, 189, 248, 0.25);
   }
 
   .about-role {
-    margin: 0 0 0.75rem;
-    color: #d9a13d;
-    font-family: Arial, sans-serif;
-    font-size: 1.15rem;
+    margin: 0 0 0.85rem;
+    color: #c084fc;
+    font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 20px rgba(192, 132, 252, 0.35);
   }
 
   .about-tagline {
     margin: 0 0 2rem;
-    color: rgba(244, 230, 202, 0.75);
+    color: rgba(226, 232, 240, 0.8);
     font-size: 1.1rem;
-    font-style: italic;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   .about-paragraphs {
     display: flex;
     flex-direction: column;
-    gap: 1.15rem;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(244, 230, 202, 0.88);
-    margin-bottom: 2.5rem;
+    gap: 1.2rem;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: rgba(226, 232, 240, 0.88);
+    margin-bottom: 2.25rem;
   }
 
+  /* Metadata Facts Grid (Rounded Chips) */
   .about-facts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.85rem;
     padding: 1.25rem;
-    border-radius: 8px;
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(217, 161, 61, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
   }
 
   .about-fact-item {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
   }
 
   .about-fact-label {
-    font-family: Arial, sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: #d9a13d;
+    color: #38bdf8;
+    font-weight: 700;
   }
 
   .about-fact-value {
-    font-size: 0.95rem;
-    color: #f4e6ca;
+    font-size: 0.92rem;
+    color: #f1f5f9;
+    font-weight: 500;
   }
 
   .about-fact-link {
-    color: #f5d77f;
+    color: #c084fc;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    transition: color 160ms ease;
+  }
+
+  .about-fact-link:hover {
+    color: #e9d5ff;
+    text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
   }
 
   .about-status-badge {
-    color: #86efac;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #4ade80;
     font-weight: 600;
   }
 
+  .about-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: statusPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* Direct Action Buttons (Pill Shapes) */
   .about-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 0.85rem;
   }
 
   .about-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.4rem;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-    font-size: 0.82rem;
+    gap: 0.55rem;
+    padding: 0.75rem 1.45rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    color: #f4e6ca;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(244, 230, 202, 0.2);
-    transition: all 180ms ease;
+    color: #f1f5f9;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(0, 242, 254, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .about-btn:hover {
-    background: rgba(217, 161, 61, 0.2);
-    border-color: #d9a13d;
+    background: rgba(0, 242, 254, 0.15);
+    border-color: #38bdf8;
     color: #ffffff;
     transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
   }
 
   .about-btn--primary {
-    background: #d9a13d;
-    border-color: #d9a13d;
-    color: #03050b;
+    background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 45%, #a855f7 100%);
+    border: none;
+    color: #030712;
     font-weight: 700;
+    box-shadow:
+      0 0 25px rgba(0, 242, 254, 0.45),
+      0 0 40px rgba(168, 85, 247, 0.3);
   }
 
   .about-btn--primary:hover {
-    background: #f5d77f;
-    border-color: #f5d77f;
-    color: #03050b;
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+    color: #030712;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      0 0 35px rgba(0, 242, 254, 0.65),
+      0 0 55px rgba(192, 132, 252, 0.5);
   }
 
   /* Sections */
   .about-section {
-    margin-bottom: 3.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .about-section-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .about-section-badge {
+    display: inline-block;
+    color: #22d3ee;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.4rem;
   }
 
   .about-section-title {
-    font-family: Georgia, serif;
-    font-size: 1.75rem;
-    font-weight: 400;
-    color: #f4e6ca;
-    margin: 0 0 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(217, 161, 61, 0.3);
+    margin: 0;
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #ffffff;
   }
 
+  /* Skills Grid & Modern Pill Tags */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -412,96 +517,166 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
   }
 
   .skills-card {
-    padding: 1.5rem;
-    border-radius: 8px;
-    background: rgba(11, 17, 32, 0.6);
-    border: 1px solid rgba(217, 161, 61, 0.2);
+    padding: 1.75rem;
+    border-radius: 22px;
+    background: rgba(8, 14, 30, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.6),
+      0 0 25px rgba(0, 242, 254, 0.08);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+  }
+
+  .skills-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(168, 85, 247, 0.45);
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.7),
+      0 0 30px rgba(168, 85, 247, 0.25);
+  }
+
+  .skills-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .skills-card-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #a855f7;
+    box-shadow: 0 0 10px #a855f7;
   }
 
   .skills-card-title {
-    margin: 0 0 1rem;
-    font-family: Arial, sans-serif;
-    font-size: 0.85rem;
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #d9a13d;
+    letter-spacing: 0.1em;
+    color: #f1f5f9;
   }
 
   .skills-list {
     margin: 0;
-    padding-left: 1.25rem;
+    padding: 0;
+    list-style: none;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: rgba(244, 230, 202, 0.85);
-    font-size: 0.95rem;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .skills-pill {
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(0, 242, 254, 0.06);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    color: rgba(241, 245, 249, 0.9);
+    font-size: 0.84rem;
+    font-weight: 500;
+    transition: all 180ms ease;
+    cursor: default;
+  }
+
+  .skills-pill:hover {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #c084fc;
+    color: #ffffff;
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.4);
+    transform: translateY(-1px);
   }
 
   /* Blog Preview Card */
   .blog-preview-card {
     position: relative;
-    padding: 2.25rem;
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(16, 26, 48, 0.7) 0%, rgba(8, 13, 25, 0.85) 100%);
-    border: 1px dashed rgba(217, 161, 61, 0.45);
+    overflow: hidden;
+    padding: clamp(2rem, 4vw, 2.75rem);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(12, 18, 38, 0.78) 0%, rgba(8, 12, 26, 0.9) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px dashed rgba(168, 85, 247, 0.45);
+    box-shadow:
+      0 16px 44px rgba(0, 0, 0, 0.65),
+      0 0 35px rgba(168, 85, 247, 0.15);
+  }
+
+  .blog-preview-glow {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.18), transparent 70%);
+    pointer-events: none;
   }
 
   .blog-preview-badge {
     display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    background: rgba(217, 161, 61, 0.2);
-    color: #f5d77f;
-    font-family: Arial, sans-serif;
-    font-size: 0.68rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(168, 85, 247, 0.18);
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    color: #c084fc;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
   }
 
   .blog-preview-title {
-    margin: 0 0 0.5rem;
-    font-family: Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #f4e6ca;
+    margin: 0 0 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
   }
 
   .blog-preview-desc {
-    margin: 0 0 1.25rem;
-    color: rgba(244, 230, 202, 0.75);
-    line-height: 1.6;
-    max-width: 60ch;
+    margin: 0 0 1.5rem;
+    color: rgba(226, 232, 240, 0.78);
+    line-height: 1.65;
+    max-width: 62ch;
+    font-size: 0.98rem;
   }
 
   .blog-preview-status {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    font-family: Arial, sans-serif;
-    font-size: 0.82rem;
-    color: #d9a13d;
+    gap: 0.65rem;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    font-size: 0.84rem;
+    color: #22d3ee;
+    font-weight: 500;
   }
 
   .pulse-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #d9a13d;
-    box-shadow: 0 0 8px #d9a13d;
-    animation: pulse 2s infinite ease-in-out;
+    background: #00f2fe;
+    box-shadow: 0 0 10px #00f2fe;
+    animation: cyanPulse 2s infinite ease-in-out;
   }
 
-  @keyframes pulse {
+  @keyframes cyanPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 0.35; transform: scale(0.85); }
   }
 
-  /* Footer banner */
+  /* Footer Banner (KaliWebWorks) */
   .about-footer-banner {
     margin-top: 5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(217, 161, 61, 0.3);
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(0, 242, 254, 0.16);
   }
 
   .about-footer-inner {
@@ -509,51 +684,68 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 2rem;
-    border-radius: 8px;
-    background: rgba(217, 161, 61, 0.08);
-    border: 1px solid rgba(217, 161, 61, 0.35);
-    margin-bottom: 2rem;
+    gap: 1.75rem;
+    padding: 2.25rem clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.12) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(0, 242, 254, 0.28);
+    box-shadow:
+      0 16px 44px rgba(0, 0, 0, 0.65),
+      0 0 35px rgba(6, 182, 212, 0.15);
+    margin-bottom: 2.25rem;
   }
 
   .about-footer-text {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.4rem;
+  }
+
+  .about-footer-badge {
+    color: #38bdf8;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
   }
 
   .about-footer-heading {
-    font-family: Georgia, serif;
-    font-size: 1.4rem;
-    color: #f5d77f;
-    font-weight: 600;
+    font-size: 1.45rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   .about-footer-sub {
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-    color: rgba(244, 230, 202, 0.8);
+    font-size: 0.94rem;
+    color: rgba(226, 232, 240, 0.8);
   }
 
   .about-footer-cta {
     display: inline-flex;
-    padding: 0.85rem 1.6rem;
-    border-radius: 6px;
-    background: #d9a13d;
-    color: #03050b;
-    font-family: Arial, sans-serif;
-    font-size: 0.85rem;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #a855f7 100%);
+    color: #030712;
+    font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: all 180ms ease;
+    letter-spacing: 0.02em;
+    box-shadow:
+      0 0 24px rgba(0, 242, 254, 0.4),
+      0 0 36px rgba(168, 85, 247, 0.28);
+    transition: all 220ms ease;
   }
 
   .about-footer-cta:hover {
-    background: #f5d77f;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(217, 161, 61, 0.35);
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      0 0 35px rgba(0, 242, 254, 0.65),
+      0 0 50px rgba(192, 132, 252, 0.45);
   }
 
   .about-footer-legal {
@@ -562,38 +754,61 @@ const pageDescription = `Learn more about ${profile.name} — ${profile.role}. A
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    font-family: Arial, sans-serif;
-    font-size: 0.78rem;
-    color: rgba(244, 230, 202, 0.55);
+    font-size: 0.8rem;
+    color: rgba(148, 163, 184, 0.7);
   }
 
   .about-footer-links {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.4rem;
   }
 
   .about-footer-links a {
     color: inherit;
     text-decoration: none;
-    transition: color 150ms ease;
+    transition: color 160ms ease;
   }
 
   .about-footer-links a:hover {
-    color: #d9a13d;
+    color: #38bdf8;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
   }
 
-  @media (max-width: 840px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-    .about-visual {
-      position: static;
-      max-width: 320px;
-      margin: 0 auto;
+  /* Responsive Breakpoints */
+  @media (max-width: 860px) {
+    .about-copy {
+      padding: clamp(1.5rem, 4vw, 2.25rem);
     }
     .about-footer-inner {
       flex-direction: column;
       text-align: center;
+      align-items: center;
+    }
+    .about-footer-text {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-facts {
+      grid-template-columns: 1fr 1fr;
+    }
+    .about-actions {
+      flex-direction: column;
+    }
+    .about-btn {
+      justify-content: center;
+      width: 100%;
+    }
+    .about-footer-legal {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+    .about-footer-links {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 </style>
+

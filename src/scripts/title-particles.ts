@@ -244,7 +244,8 @@ function ensureHomeSuppressionStyle(frameDocument: Document) {
   style.textContent = `
     .content > h1,
     .content > p,
-    #hyper-btn {
+    #hyper-btn,
+    .share {
       display: none !important;
     }
   `;
@@ -302,6 +303,8 @@ function setupHyperTravel(
     event.preventDefault();
     if (navigating || !link) return;
     navigating = true;
+    link.classList.add("is-transitioning");
+    document.querySelector(".wormhole-dock")?.classList.add("is-transitioning");
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -315,7 +318,10 @@ function setupHyperTravel(
       // The iframe animation and the particle outro are independent. Do not
       // skip the iframe animation just because WebGL particles are still
       // initializing on the parent page.
-      travelButton?.click();
+      const btn =
+        travelButton ||
+        frame?.contentDocument?.querySelector<HTMLButtonElement>("#hyper-btn");
+      btn?.click();
       if (effects.ready) effects.start();
       navigationTimer = window.setTimeout(navigate, 2500);
     } catch {
