@@ -47,7 +47,7 @@ export const profile: ProfileData = {
   skills: [
     {
       category: "Frontend & Web",
-      items: ["Astro", "TypeScript", "JavaScript", "HTML5", "Vite", "React", "Vue", "next.js", "TailwindCSS"],
+      items: ["Astro", "TypeScript", "JavaScript", "HTML5", "Vite", "React", "Vue", "Next.js", "TailwindCSS"],
     },
     {
       category: "Design & Digital Media",
